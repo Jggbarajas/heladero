@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/estilo.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <img src="imagenes/logo.png" alt="logo">
+        <h1 class="px-3">Heladeria</h1>
+    </header>
+    <div class="helados">
+        <div class="row">
+          <div class="col">
+            <img src="imagenes/helado1.jpg" alt="helado1">
+            <h3>helado fresa</h3>
+            <p>precio: $1</p>
+            <button class="ordenar-btn" data-nombre="helado fresa" data-precio="1">ordenar</button>
+
+            <br>
+            <img src="imagenes/helado2.jpg" alt="helado2">
+            <h3>helado vainilla</h3>
+            <p>precio: $1</p>
+            <button class="ordenar-btn" data-nombre="helado vainilla" data-precio="1">ordenar</button>
+          </div>
+
+          <div class="col">
+            <img src="imagenes/helado3.jpg" alt="helado3">
+            <h3>helado chocolate</h3>
+            <p>precio: $1.05</p>
+            <button class="ordenar-btn" data-nombre="helado chocolate" data-precio="1.05">ordenar</button>
+            <br>
+
+            <img src="imagenes/helado4.jpg" alt="helado4">
+            <h3>barquillon</h3>
+            <p>precio: $1.10</p>
+            <button class="ordenar-btn" data-nombre="barquillon" data-precio="1.10">ordenar</button>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <p id="total">Total: $0.00</p>
+        <div id="carrito"></div>
+        <button onclick="confirmarOrden()">Confirmar Orden</button>
+      </footer>
+      
+      <script>
+        const ordenarBtns = document.querySelectorAll('.ordenar-btn');
+        const carrito = document.getElementById('carrito');
+        let total = 0;
+      
+        function agregarProducto(nombre, precio) {
+          const item = document.createElement('li');
+          item.textContent = `${nombre} - $${precio.toFixed(2)}`;
+          carrito.appendChild(item);
+          total += precio;
+          actualizarTotal();
+        }
+      
+        function actualizarTotal() {
+          document.getElementById('total').textContent = `Total: $${total.toFixed(2)}`;
+        }
+
+            function confirmarOrden() {
+      alert('Gracias por su compra');
+      location.reload();
+    }
+        ordenarBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const nombre = btn.getAttribute('data-nombre');
+            const precio = parseFloat(btn.getAttribute('data-precio'));
+            agregarProducto(nombre, precio);
+          });
+        });
+      </script>
+    <script src="js/bootstrap.bundle.js"></script>
+</body>
+</html>
